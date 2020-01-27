@@ -4,3 +4,4 @@ xyz, Another Drug Company, 02/01/2000, 1
 ibuprofen, Advil, 02/01/1980, 1
 bad drug, Evil Company, 02/01/1985, 2
 aspirin, Venom, 05/01/1960, 0
+xyz, Another Drug Company, 02/01/2000, 1
