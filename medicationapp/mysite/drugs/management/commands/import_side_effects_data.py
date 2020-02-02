@@ -12,28 +12,30 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        # get the name of the file to import from arguments
         side_effect_data_filename = options['side_effects_data_file']
-        #if options['medication_data_file']:
 
-
-        # if filename is not empty, open the file and read all lines
         if side_effect_data_filename:
             content_lines = []
 
             with open(side_effect_data_filename, 'r') as f:
                 next(f)
                 content_lines = f.readlines()
+
+
+
             for row in content_lines:
                 row = row.split(',')
-                side_effect = SideEffect()
-                medication = Medication()
-                medication.medication_name = row[0].strip()
-                side_effect.side_effect = row[1].strip()
-                side_effect.date_published = row[2].strip()
-                #print(row[0].strip())
-                #side_effect.save()
-            print(medication.medication_name)
+
+                medicationName = row[0].strip()
+
+                med = Medication.objects.filter(medication_name=medicationName).first()
+
+                if not med:
+                    print('error: can not find medication %s associated with side effect' % medicationName)
+                    continue
+
+                sideEffect = SideEffect()
+                sideEffect.medication = med
 
         else:
             print('Error: specify file')

@@ -6,3 +6,4 @@ ibuprofen, elevated heart rate, 2010-01-01
 ibuprofen, stomack bleeding, 2009-01-01
 ibuprofen, headache, 2009-01-01
 xyz, dhierrea, 2001-02-01
+aspirin, headache, 2000-06-01, 0

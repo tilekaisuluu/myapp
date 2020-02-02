@@ -32,29 +32,25 @@ class Command(BaseCommand):
             # go through each row
             for row in content_lines:
                 # split row into tokens
-
                 row = row.split(',')
-                #print(row)
+                # create empty Medication object
                 medication = Medication()
+                # add fields
                 medication.medication_name = row[0].strip()
                 medication.manufacturer = row[1].strip()
-                #print(row[2].strip())
-
                 medication.date_on_market = row[2].strip()
                 medication.status = row[3].strip()
-                duplicates = Medication.objects.values(
-                    'medication_name'
-                ).annotate(name_count=Count('medication_name')).filter(name_count__gt=1)
-                records = Medication.objects.filter(first_name__in=[item['medication_name'] for item in duplicates])
-                print([item.id for item in records])
 
+                # look up all records in database with the same: name
+                db_records = Medication.objects.filter(medication_name=medication.medication_name).count()
 
-
-                #for medication in with_duplicates:
-                    #duplicates = Medication.objects.filter(name=medication.medication_name).exclude(id=medication.id)
-                #medication.save()
-                #print(medication.manufacturer)
-
-
+                # if records exist in database with same name and date_on_market, print error and continue to next line
+                if db_records > 0:
+                    print('error: medication already exists %s' % medication.medication_name)
+                    continue
+                else:
+                    # save new medication to database
+                    medication.save()
+                    print('saved new medication %s' % medication.medication_name)
         else:
             print('Error: specify file')
