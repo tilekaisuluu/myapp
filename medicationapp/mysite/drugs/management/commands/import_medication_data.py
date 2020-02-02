@@ -38,12 +38,22 @@ class Command(BaseCommand):
                 medication = Medication()
                 medication.medication_name = row[0].strip()
                 medication.manufacturer = row[1].strip()
-                print(row[2].strip())
+                #print(row[2].strip())
 
                 medication.date_on_market = row[2].strip()
                 medication.status = row[3].strip()
-                medication.save()
-                print(medication.manufacturer)
+                duplicates = Medication.objects.values(
+                    'medication_name'
+                ).annotate(name_count=Count('medication_name')).filter(name_count__gt=1)
+                records = Medication.objects.filter(first_name__in=[item['medication_name'] for item in duplicates])
+                print([item.id for item in records])
+
+
+
+                #for medication in with_duplicates:
+                    #duplicates = Medication.objects.filter(name=medication.medication_name).exclude(id=medication.id)
+                #medication.save()
+                #print(medication.manufacturer)
 
 
         else:

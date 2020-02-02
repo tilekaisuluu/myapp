@@ -1,8 +1,8 @@
 drug_name, side_effect, date_published
-bad drug, high blood pressure, 05/05/2018
-bad drug, kidney failure, 05/10/2018
-bad drug, internal bleeding, 05/11/2018
-ibuprofen, elevated heart rate, 01/01/2010
-ibuprofen, stomack bleeding, 01/01/2009
-ibuprofen, headache, 01/01/2009
-xyz, dhierrea, 02/01/2001, 1
+bad drug, high blood pressure, 2018-05-05
+bad drug, kidney failure, 2018-05-10
+bad drug, internal bleeding, 2018-05-11
+ibuprofen, elevated heart rate, 2010-01-01
+ibuprofen, stomack bleeding, 2009-01-01
+ibuprofen, headache, 2009-01-01
+xyz, dhierrea, 2001-02-01

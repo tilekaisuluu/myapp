@@ -1,6 +1,7 @@
 drug_name, manufacturer, date_on_market, status
 abc, Mega Farma, 1998-01-01, 0
 xyz, Another Drug Company, 2000-02-01, 1
-ibuprofen, Advil, 1980-02-01, 1
+ibuprofen, Advil, 2009-01-01, 1
 bad drug, Evil Company, 1985-05-01, 2
+aspirin, Venom, 1960-06-01, 0
 aspirin, Venom, 1960-06-01, 0

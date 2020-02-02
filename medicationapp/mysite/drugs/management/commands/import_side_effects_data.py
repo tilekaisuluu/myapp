@@ -7,7 +7,6 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--side_effects_data_file',
-            action='store_true',
             help='Name of the file with medication side effects data'
         )
 
@@ -22,17 +21,19 @@ class Command(BaseCommand):
         if side_effect_data_filename:
             content_lines = []
 
-
-            with open('medication_side_effects_database.txt', 'r') as f:
-                content_lines = f.read().split(',')
-                for row in content_lines:
-                    #content_lines.append(row.split(','))
-                    row = row.split(',')
-                    side_effect = SideEffect()
-                    side_effect.side_effect = row[0]
-                    #side_effect.date_published = row[]
-                    #side_effect.save()
-                    print(side_effect.side_effect)
+            with open(side_effect_data_filename, 'r') as f:
+                next(f)
+                content_lines = f.readlines()
+            for row in content_lines:
+                row = row.split(',')
+                side_effect = SideEffect()
+                medication = Medication()
+                medication.medication_name = row[0].strip()
+                side_effect.side_effect = row[1].strip()
+                side_effect.date_published = row[2].strip()
+                #print(row[0].strip())
+                #side_effect.save()
+            print(medication.medication_name)
 
         else:
             print('Error: specify file')
