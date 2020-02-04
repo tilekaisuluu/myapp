@@ -11,18 +11,22 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        # get the year to import from arguments
+        year = options["year"]
 
-        #
-        # BUG: check if "year" argument is set, if not: return error
-        #
+        # check if year specified
+        if options["year"]:
+            # filter all medication with date_on_market year same as year specified in CLI
+            medication_list = Medication.objects.filter(date_on_market__year=year)
+            # loop through the list to print medication name :: manufacturer :: date_on_market
+            for med in medication_list:
+                print("%s :: %s :: %s" % (med.medication_name, med.manufacturer, med.date_on_market))
+            # filter all side_effects with date published year same as year specified in ClI
+            side_effect_list = SideEffect.objects.filter(date_published__year=year)
+            # loop through the list to print side effect -> medication name
+            for side_effect in side_effect_list:
+                print("%s -> %s" % (side_effect.side_effect, side_effect.medication))
 
 
-        # find all medication with date_on_market year same as year specified in CLI (look at https://docs.djangoproject.com/en/3.0/intro/tutorial02/)
-        year = options['year']
-        medication_list = Medication.objects.filter(date_on_market__year=year) #.values_list('medication_name', 'manufacturer', 'date_on_market')
-
-        for med in medication_list:
-            print("%s :: %s :: %s" % (med.medication_name, med.manufacturer, med.date_on_market))
-
-
-        # ....
+        else:
+            print('Error: specify year')
