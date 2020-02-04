@@ -10,7 +10,6 @@ class Medication(models.Model):
     def __str__(self):
         return self.medication_name
 
-
 class SideEffect(models.Model):
     medication = models.ForeignKey(Medication, on_delete=models.CASCADE, null=True, blank = True)
     side_effect = models.CharField(max_length=200)
@@ -18,5 +17,7 @@ class SideEffect(models.Model):
 
     def __str__(self):
         return self.side_effect
+
+
 
 
