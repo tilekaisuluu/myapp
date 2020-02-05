@@ -20,6 +20,5 @@ import drugs
 urlpatterns = [
     path('drugs/', include('drugs.urls')),
     path('admin/', admin.site.urls),
-
     # http://localhost:8000/list
 ]

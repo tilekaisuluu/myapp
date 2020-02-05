@@ -1,0 +1,18 @@
+<div>
+    <h1><a href="/">List Of Medications</a></h1>
+</div>
+
+
+{% for med in medication_list %}
+    <div>
+        <p><a href="/detail/">{{ med.medication_name }}</a></p>
+{% endfor %}
+    </div>
+
+<div>
+    <h1><a href="/">List Of Side Effects</a></h1>
+</div>
+
+{% for side_effect in side_effect_list %}
+    {{ side_effect.side_effect }}
+{% endfor %}

@@ -1,0 +1,7 @@
+{% for med in medication_list %}
+    <div>
+        <p>{{ med.medication_name }}</p>
+        <p>{{ med.manufacturer }}</p>
+        <p>date on market: {{ med.date_on_market }} </p>
+    </div>
+{% endfor %}
