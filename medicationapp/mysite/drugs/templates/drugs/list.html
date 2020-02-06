@@ -5,14 +5,13 @@
 {% for med in medication_list %}
     <div>
         <p>{{ med.medication_name }}
-
-            if med.sideffects count is > 0 {
-                {{ med.sideeffect_set.all }}
-            }
-            else {
-                print (no side effects)
-            }
-
+            {% for med.medication in medication_list %}
+            {% if med.sideeffect_set.all.count > 0 %}
+                ({{ med.sideeffect_set.all }})
+            {% else %}
+                No side effects
+            {% endif %}
+            {% endfor %}
         </p>
     </div>
 {% endfor %}
