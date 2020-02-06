@@ -1,17 +1,38 @@
 <div>
     <h1><a href="/">List Of Medications</a></h1>
 </div>
-
+{####### take each medication in the list #######}
 {% for med in medication_list %}
     <div>
-        <p>{{ med.medication_name }}
-            {% for med.medication in medication_list %}
-            {% if med.sideeffect_set.all.count > 0 %}
-                ({{ med.sideeffect_set.all }})
-            {% else %}
-                No side effects
-            {% endif %}
-            {% endfor %}
+        <p> {####### print medication name #######}
+            {{ med.medication_name }}
+            (
+
+                {####### check if THIS med has any side effects #######}
+                {% if med.sideeffect_set.all.count > 0 %}
+
+                    {####### take each side effect from side effect list #######}
+                    {% for side_effect in med.sideeffect_set.all %}
+
+                        {####### print side effect  #######}
+                        {{ side_effect.side_effect }}
+
+                        {####### check if we need to print comma  #######}
+                        {% if not forloop.last %}
+                        ,
+                        {% endif %}
+
+                {% endfor %}
+
+                {% else %}
+                    No side effects
+                {% endif %}
+            )
         </p>
     </div>
 {% endfor %}
+
+
+
+
+
