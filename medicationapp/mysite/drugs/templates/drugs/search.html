@@ -7,9 +7,12 @@
 
 </head>
 <body>
-<form action="/drugs/search/" method="post">
-<input type="text" name="search_query" id="search_query">
-    ...
+{####### search form  #######}
+<h1>Side FX</h1>
+<form method="GET" action="{% url 'search' %}" >
+    <input name="query"  placeholder="search">
+    <input type="submit" >
+    <p>Search by Medication name or Side effect</p>
 </form>
 </body>
 </html>
