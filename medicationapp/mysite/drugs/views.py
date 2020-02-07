@@ -18,14 +18,17 @@ def search(request):
     if 'query' in request.GET:
         # extract search term from request
         query = request.GET['query']
+
         # empty list for all results
         search_results_list = []
-        print(search_results_list)
 
         # filtering medication names
         result = Medication.objects.filter(Q(medication_name__icontains=query))
         # adding medication name results to search_results_list
-        search_results_list.append(result)
+        for m in result:
+            # adding all medications which related to side effect which is found to search_results_list
+            search_results_list.append(m)
+
         # filtering side effects
         result2 = SideEffect.objects.filter(Q(side_effect__icontains=query))
         # loop through each side effect in result2
@@ -33,9 +36,13 @@ def search(request):
             # adding all medications which related to side effect which is found to search_results_list
             search_results_list.append(se.medication)
         # rendering to the list.html page
+
+        print('results %s' % search_results_list)
         return render(request, 'drugs/list.html', {'search_results_list': search_results_list})
      # if not render to search.html page
+
     else:
+        print('rendering search.html')
         return render(request, 'drugs/search.html')
 
         # IF THIS IS A GET:
